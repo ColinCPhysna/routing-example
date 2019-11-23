@@ -13,9 +13,25 @@ import {
   Contact,
   Detail,
   Search,
+  Identify,
+  Compare
 } from './pages';
 
+
+
 const Root = () => {
+
+  const routes = [
+    {path:`/`, component: Home, exact: true},
+    {path:`/search`, component: Search, exact: false},
+    {path:`/profile/:id`, component: Profile, exact: false},
+    {path:`/portfolio/:id`, component: Portfolio, exact: false},
+    {path:`/contact/:id`, component: Contact, exact: false},
+    {path:`/detail/:id`, component: Detail, exact: true},
+    {path:`/detail/:id/identify`, component: Identify, exact: false},
+    {path:`/detail/:id/compare`, component: Compare, exact: false},
+  ]
+  
   return (
     <Router>
       <div>
@@ -41,15 +57,7 @@ const Root = () => {
         </ul>
         <hr />
       <Switch>
-        {/*User Routes*/}
-        <Route exact path="/" component={Home} />
-        <Route path="/portfolio/:id" component={Portfolio} />
-        <Route path="/profile/:id" component={Profile} />
-        <Route path="/contact/:id" component={Contact}/>
-
-        {/*Model Routes*/}
-        <Route exact path="/detail/:id" component={Detail} />
-        <Route path="/search" component={Search} />
+      {routes.map(({path,component,exact}, key) => <Route key={key} path={path} component={component} exact={exact}/>)}
       </Switch>
       </div>
     </Router>
